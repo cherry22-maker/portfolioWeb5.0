@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherryonTop Café | Coffee & Good Moments</title>
+    <meta name="description" content="cherryonTop Café — handcrafted coffee, sweet treats, and cozy moments.">
+    <style>
+         :root {
+            --red: #b5122b;
+            --red-dark: #7f0b1e;
+            --red-light: #fff0f2;
+            --cream: #fffaf7;
+            --white: #fff;
+            --ink: #251719;
+            --muted: #766568;
+            --gold: #c58a43;
+            --line: #ead9dc;
+            --shadow: 0 18px 50px rgba(80, 8, 20, .13);
+            --radius: 24px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        
+        html {
+            scroll-behavior: smooth
+        }
+        
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--ink);
+            background: var(--cream);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+        
+        button {
+            font: inherit
+        }
+        
+        .container {
+            width: min(1140px, 92%);
+            margin: auto
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, .94);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(181, 18, 43, .12);
+        }
+        
+        .nav {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 1.65rem;
+            font-weight: 900;
+            letter-spacing: -1px
+        }
+        
+        .logo span {
+            color: var(--red)
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+            align-items: center
+        }
+        
+        .nav-links a {
+            font-family: Arial, sans-serif;
+            font-size: .82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4c3a3d;
+            transition: .25s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--red)
+        }
+        
+        .nav-cta {
+            background: var(--red)!important;
+            color: #fff!important;
+            padding: 10px 16px;
+            border-radius: 999px;
+        }
+        
+        .menu-toggle {
+            display: none;
+            border: 0;
+            background: var(--red);
+            color: #fff;
+            padding: 9px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        section {
+            padding: 110px 0
+        }
+        
+        .hero {
+            min-height: 100vh;
+            padding-top: 145px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 80% 25%, #ffd9df 0, transparent 28%), linear-gradient(135deg, #fff 0%, #fff 54%, #fff1f3 100%);
+        }
+        
+        .hero:before {
+            content: "☕";
+            position: absolute;
+            right: -35px;
+            top: 12%;
+            font-size: 22rem;
+            opacity: .045;
+            transform: rotate(12deg);
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 65px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--red-light);
+            color: var(--red);
+            border: 1px solid #f5cbd2;
+            border-radius: 999px;
+            padding: 7px 13px;
+            font-family: Arial, sans-serif;
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: clamp(3.5rem, 7vw, 6.6rem);
+            line-height: .9;
+            letter-spacing: -5px;
+            margin-bottom: 25px;
+        }
+        
+        h1 em {
+            color: var(--red);
+            font-style: normal
+        }
+        
+        .hero-copy {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            max-width: 590px;
+            font-size: 1.04rem;
+            margin-bottom: 30px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 21px;
+            border-radius: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: 800;
+            transition: .25s;
+            border: 1.5px solid var(--red);
+        }
+        
+        .btn-primary {
+            background: var(--red);
+            color: #fff
+        }
+        
+        .btn-primary:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px #b5122b30
+        }
+        
+        .btn-outline {
+            background: #fff;
+            color: var(--red)
+        }
+        
+        .btn-outline:hover {
+            background: var(--red-light);
+            transform: translateY(-2px)
+        }
+        
+        .coffee-scene {
+            position: relative;
+            min-height: 470px;
+            display: grid;
+            place-items: center;
+        }
+        
+        .cup {
+            width: 270px;
+            height: 185px;
+            background: #fff;
+            border-radius: 25px 25px 85px 85px;
+            position: relative;
+            box-shadow: var(--shadow);
+            border: 8px solid #fff;
+            transform: rotate(-4deg);
+        }
+        
+        .cup:before {
+            content: "";
+            position: absolute;
+            left: 23px;
+            right: 23px;
+            top: 16px;
+            height: 38px;
+            border-radius: 50%;
+            background: #5a2c20;
+            box-shadow: inset 0 8px 10px #32160f;
+        }
+        
+        .cup:after {
+            content: "";
+            position: absolute;
+            right: -72px;
+            top: 48px;
+            width: 70px;
+            height: 72px;
+            border: 15px solid #fff;
+            border-left: 0;
+            border-radius: 0 50% 50% 0;
+        }
+        
+        .saucer {
+            position: absolute;
+            width: 350px;
+            height: 48px;
+            background: #fff;
+            border-radius: 50%;
+            bottom: 65px;
+            box-shadow: 0 17px 25px #54101e1b;
+        }
+        
+        .beans {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        
+        .bean {
+            position: absolute;
+            width: 25px;
+            height: 36px;
+            background: #5a2c20;
+            border-radius: 50%;
+            opacity: .9
+        }
+        
+        .bean:after {
+            content: "";
+            position: absolute;
+            left: 11px;
+            top: 3px;
+            width: 2px;
+            height: 29px;
+            background: #d19a77;
+            transform: rotate(20deg)
+        }
+        
+        .b1 {
+            top: 60px;
+            left: 15%
+        }
+        
+        .b2 {
+            top: 180px;
+            right: 8%;
+            transform: rotate(35deg)
+        }
+        
+        .b3 {
+            bottom: 100px;
+            left: 9%;
+            transform: rotate(-25deg)
+        }
+        
+        .b4 {
+            top: 110px;
+            right: 22%;
+            transform: rotate(65deg)
+        }
+        
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: end;
+            margin-bottom: 45px;
+        }
+        
+        .kicker {
+            color: var(--red);
+            font-family: Arial, sans-serif;
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-top: 8px
+        }
+        
+        .section-head p {
+            max-width: 500px;
+            color: var(--muted);
+            font-family: Arial, sans-serif
+        }
+        
+        .about {
+            background: var(--red);
+            color: #fff
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 35px;
+            align-items: stretch
+        }
+        
+        .about-box {
+            background: #fff;
+            color: var(--ink);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-box.dark {
+            background: #8e0c24;
+            color: #fff;
+            border: 1px solid #c33b51
+        }
+        
+        .about-box p {
+            font-family: Arial, sans-serif;
+            color: var(--muted);
+            margin: 15px 0
+        }
+        
+        .about-box.dark p {
+            color: #ffe9ed
+        }
+        
+        .signature {
+            font-size: 2rem;
+            color: #fff;
+            font-style: italic;
+            margin-top: 30px
+        }
+        
+        .hours {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ffffff30;
+            font-family: Arial, sans-serif;
+            font-size: .9rem;
+        }
+        
+        .hours div {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0
+        }
+        
+        .menu-section {
+            background: #fff
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px
+        }
+        
+        .menu-card {
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 22px;
+            transition: .3s;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: #e6b5be
+        }
+        
+        .menu-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px
+        }
+        
+        .menu-card h3 {
+            font-size: 1.25rem
+        }
+        
+        .price {
+            color: var(--red);
+            font-weight: 900;
+            font-family: Arial, sans-serif
+        }
+        
+        .menu-card p {
+            font-family: Arial, sans-serif;
+            color: var(--muted);
+            font-size: .86rem;
+            margin-top: 6px
+        }
+        
+        .menu-icon {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            background: var(--red-light);
+            border-radius: 13px;
+            margin-bottom: 14px;
+            font-size: 1.25rem;
+        }
+        
+        .special {
+            background: var(--red-light);
+        }
+        
+        .special-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px
+        }
+        
+        .special-card {
+            min-height: 250px;
+            padding: 35px;
+            border-radius: 28px;
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 35px #8f10211a;
+        }
+        
+        .special-card.featured {
+            background: var(--red);
+            color: #fff
+        }
+        
+        .special-card p {
+            font-family: Arial, sans-serif;
+            margin: 12px 0 22px;
+            color: var(--muted)
+        }
+        
+        .special-card.featured p {
+            color: #ffe9ed
+        }
+        
+        .price-big {
+            font-size: 2.4rem;
+            color: var(--red);
+            font-weight: 900
+        }
+        
+        .featured .price-big {
+            color: #fff
+        }
+        
+        .story {
+            background: #fff;
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 55px;
+            align-items: center
+        }
+        
+        .story-art {
+            min-height: 380px;
+            border-radius: 32px;
+            background: var(--red);
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-art:before {
+            content: "CHERRY";
+            position: absolute;
+            color: #fff1f3;
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 7px;
+            transform: rotate(-12deg);
+        }
+        
+        .cherry {
+            position: relative;
+            z-index: 1;
+            font-size: 8rem;
+            filter: drop-shadow(0 18px 20px #51061550);
+        }
+        
+        .story-copy p {
+            font-family: Arial, sans-serif;
+            color: var(--muted);
+            margin: 17px 0
+        }
+        
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 25px
+        }
+        
+        .value {
+            padding: 15px;
+            background: var(--red-light);
+            border-radius: 15px;
+            text-align: center
+        }
+        
+        .value strong {
+            display: block;
+            color: var(--red);
+            font-family: Arial, sans-serif
+        }
+        
+        .value span {
+            font-family: Arial, sans-serif;
+            font-size: .72rem;
+            color: var(--muted)
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, var(--red-dark), var(--red));
+            color: #fff;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 40px;
+            align-items: center
+        }
+        
+        .contact p {
+            font-family: Arial, sans-serif;
+            color: #ffe8ec;
+            margin: 18px 0 28px;
+            max-width: 560px
+        }
+        
+        .contact-card {
+            background: #fff;
+            color: var(--ink);
+            border-radius: 25px;
+            padding: 27px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-row {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+            font-family: Arial, sans-serif;
+        }
+        
+        .contact-row:last-child {
+            border: 0
+        }
+        
+        .contact-icon {
+            font-size: 1.3rem
+        }
+        
+        .contact-row strong {
+            display: block;
+            font-size: .9rem
+        }
+        
+        .contact-row span {
+            color: var(--muted);
+            font-size: .76rem
+        }
+        
+        footer {
+            background: #21070d;
+            color: #d9bfc4;
+            padding: 24px 0;
+            font-family: Arial, sans-serif;
+            font-size: .8rem
+        }
+        
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px
+        }
+        
+        #topBtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 45px;
+            height: 45px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--red);
+            color: #fff;
+            cursor: pointer;
+            display: none;
+            z-index: 900;
+            box-shadow: 0 10px 25px #b5122b50;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: .7s
+        }
+        
+        .reveal.show {
+            opacity: 1;
+            transform: none
+        }
+        
+        @media(max-width:850px) {
+            .menu-toggle {
+                display: block
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 78px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                padding: 18px 4%;
+                flex-direction: column;
+                align-items: flex-start;
+                border-bottom: 1px solid var(--line)
+            }
+            .nav-links.open {
+                display: flex
+            }
+            .hero-grid,
+            .about-grid,
+            .special-grid,
+            .story-grid,
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+            .menu-grid {
+                grid-template-columns: 1fr
+            }
+            .coffee-scene {
+                min-height: 390px
+            }
+            .section-head {
+                display: block
+            }
+            .section-head p {
+                margin-top: 15px
+            }
+        }
+        
+        @media(max-width:520px) {
+            section {
+                padding: 85px 0
+            }
+            h1 {
+                letter-spacing: -3px
+            }
+            .values {
+                grid-template-columns: 1fr
+            }
+            .footer-inner {
+                flex-direction: column
+            }
+            .cup {
+                width: 220px;
+                height: 150px
+            }
+            .saucer {
+                width: 285px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav">
+            <a class="logo" href="#home">cherry<span>onTop</span> ☕</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a class="active" href="#home">Home</a></li>
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#specials">Specials</a></li>
+                <li><a href="#contact" class="nav-cta">Visit Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="reveal">
+                    <span class="badge">Coffee • Comfort • Connection</span>
+                    <h1>Your daily cup of <em>goodness.</em></h1>
+                    <p class="hero-copy">Welcome to <strong>cherryonTop</strong> — a cozy coffee shop where handcrafted drinks, sweet treats, and warm conversations come together.</p>
+                    <div class="buttons">
+                        <a href="#menu" class="btn btn-primary">Explore Our Menu →</a>
+                        <a href="#about" class="btn btn-outline">Discover Our Story</a>
+                    </div>
+                </div>
+                <div class="coffee-scene reveal">
+                    <div class="beans">
+                        <i class="bean b1"></i><i class="bean b2"></i><i class="bean b3"></i><i class="bean b4"></i>
+                    </div>
+                    <div class="saucer"></div>
+                    <div class="cup"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker" style="color:#ffd9e0">01 — Our Story</div>
+                        <h2>More than coffee.<br>It's a feeling.</h2>
+                    </div>
+                    <p style="color:#ffe5e9">A little corner made for slow mornings, productive afternoons, friendly conversations, and delicious cups.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-box dark reveal">
+                        <div class="kicker" style="color:#ffd9e0">The cherry on top</div>
+                        <p>We believe every great day deserves one small thing that makes it better — a beautifully crafted cup, a warm smile, and a place that feels like home.</p>
+                        <div class="signature">cherryonTop</div>
+                        <div class="hours">
+                            <div><span>Mon – Fri</span><strong>7:00 AM – 9:00 PM</strong></div>
+                            <div><span>Sat – Sun</span><strong>8:00 AM – 10:00 PM</strong></div>
+                        </div>
+                    </div>
+                    <div class="about-box reveal">
+                        <h3>Made with care, served with heart.</h3>
+                        <p>From rich espresso to refreshing iced drinks and freshly prepared treats, every item is created to make your visit memorable.</p>
+                        <p>Whether you're catching up with friends, studying, working on your next big idea, or simply enjoying some quiet time, there's always a seat waiting for you at cherryonTop.</p>
+                        <div class="buttons"><a class="btn btn-primary" href="#contact">Plan Your Visit</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section" id="menu">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker">02 — Our Menu</div>
+                        <h2>Find your<br>perfect cup.</h2>
+                    </div>
+                    <p>Sample menu below — change the names and prices to match your actual coffee shop menu.</p>
+                </div>
+                <div class="menu-grid">
+                    <article class="menu-card reveal">
+                        <div class="menu-icon">☕</div>
+                        <div class="menu-top">
+                            <h3>Classic Latte</h3><span class="price">₱145</span></div>
+                        <p>Velvety espresso blended with steamed milk and a soft layer of foam.</p>
+                    </article>
+                    <article class="menu-card reveal">
+                        <div class="menu-icon">🤎</div>
+                        <div class="menu-top">
+                            <h3>Spanish Latte</h3><span class="price">₱155</span></div>
+                        <p>Bold espresso balanced with creamy milk and a touch of sweetness.</p>
+                    </article>
+                    <article class="menu-card reveal">
+                        <div class="menu-icon">🧊</div>
+                        <div class="menu-top">
+                            <h3>Iced Caramel Coffee</h3><span class="price">₱165</span></div>
+                        <p>Chilled coffee, milk, and caramel for a smooth and refreshing treat.</p>
+                    </article>
+                    <article class="menu-card reveal">
+                        <div class="menu-icon">🍵</div>
+                        <div class="menu-top">
+                            <h3>Matcha Latte</h3><span class="price">₱160</span></div>
+                        <p>Earthy matcha with creamy milk — a calming alternative to coffee.</p>
+                    </article>
+                    <article class="menu-card reveal">
+                        <div class="menu-icon">🍓</div>
+                        <div class="menu-top">
+                            <h3>Strawberry Cream</h3><span class="price">₱170</span></div>
+                        <p>Sweet strawberry goodness with a creamy, dreamy finish.</p>
+                    </article>
+                    <article class="menu-card reveal">
+                        <div class="menu-icon">🍰</div>
+                        <div class="menu-top">
+                            <h3>Red Velvet Cake</h3><span class="price">₱135</span></div>
+                        <p>Soft red velvet cake paired with a rich and creamy frosting.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="special" id="specials">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker">03 — Specials</div>
+                        <h2>A little extra<br>for your day.</h2>
+                    </div>
+                    <p>Feature your best-selling drink, seasonal offers, or customer favorites here.</p>
+                </div>
+                <div class="special-grid">
+                    <article class="special-card featured reveal">
+                        <div class="kicker" style="color:#ffd9e0">Customer favorite</div>
+                        <h3 style="font-size:2rem;margin-top:10px">Cherry Cream Latte</h3>
+                        <p>Our signature-inspired creation — smooth coffee, creamy milk, and a sweet cherry finish.</p>
+                        <span class="price-big">₱175</span>
+                    </article>
+                    <article class="special-card reveal">
+                        <div class="kicker">Combo of the day</div>
+                        <h3 style="font-size:2rem;margin-top:10px">Coffee + Cake</h3>
+                        <p>Pair any classic coffee with a slice of our cake selection and make your afternoon extra special.</p>
+                        <span class="price-big">₱250</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="story">
+            <div class="container story-grid">
+                <div class="story-art reveal">
+                    <div class="cherry">🍒</div>
+                </div>
+                <div class="story-copy reveal">
+                    <div class="kicker">04 — The cherryonTop experience</div>
+                    <h2>Small moments.<br>Big memories.</h2>
+                    <p>Our goal is simple: create a space where great coffee and genuine connection meet. Every detail — from the first sip to the last bite — is part of the experience.</p>
+                    <div class="values">
+                        <div class="value"><strong>01</strong><span>Quality</span></div>
+                        <div class="value"><strong>02</strong><span>Warmth</span></div>
+                        <div class="value"><strong>03</strong><span>Creativity</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="container contact-grid">
+                <div class="reveal">
+                    <div class="kicker" style="color:#ffd9e0">05 — Visit Us</div>
+                    <h2>Come for the coffee.<br>Stay for the vibe.</h2>
+                    <p>Replace the sample details below with your coffee shop's real address, phone number, email, and social media accounts.</p>
+                    <a class="btn btn-outline" href="mailto:hello@cherryontop.cafe">Contact cherryonTop →</a>
+                </div>
+                <div class="contact-card reveal">
+                    <div class="contact-row">
+                        <div class="contact-icon">📍</div>
+                        <div><strong>Your Coffee Shop Address</strong><span>Location</span></div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">📞</div>
+                        <div><strong>+63 900 000 0000</strong><span>Call us</span></div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">✉️</div>
+                        <div><strong>hello@cherryontop.cafe</strong><span>Email</span></div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">📱</div>
+                        <div><strong>@cherryonTopCafe</strong><span>Instagram / Facebook</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <span>© <span id="year"></span> cherryonTop Café. All rights reserved.</span>
+            <span>Crafted with coffee & ♥</span>
+        </div>
+    </footer>
+
+    <button id="topBtn" aria-label="Back to top">↑</button>
+
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+        const topBtn = document.getElementById("topBtn");
+        const links = document.querySelectorAll(".nav-links a");
+        const sections = document.querySelectorAll("section[id]");
+
+        menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+        links.forEach(link => link.addEventListener("click", () => navLinks.classList.remove("open")));
+
+        window.addEventListener("scroll", () => {
+            topBtn.style.display = window.scrollY > 500 ? "block" : "none";
+            let current = "";
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 140) current = section.id;
+            });
+            links.forEach(link => {
+                link.classList.toggle("active", link.getAttribute("href") === "#" + current);
+            });
+        });
+
+        topBtn.addEventListener("click", () => window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        }));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add("show");
+            });
+        }, {
+            threshold: .12
+        });
+        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
